@@ -1,0 +1,25 @@
+=form_with model: @article do |form|
+  %div
+    =form.label :title, class: 'form-label'
+    %br
+    =form.text_field :title, class: 'form-control'
+    - @article.errors.full_messages_for(:title).each do |error|
+      %p= error
+  %div
+    =form.label :body, class: 'form-label'
+    %br
+    =form.text_area :body, class: 'form-control', row: 5
+    - @article.errors.full_messages_for(:body).each do |error|
+      %p= error
+  %div
+    =form.label :image, class: 'form-label'
+    %br
+    =form.file_field :image, class: 'form-control'
+  %div.mt-5.d-flex.justify-content-between
+    =link_to "Back", root_path, class: 'btn btn-outline-warning'
+    =form.submit "Create Article", class: 'btn btn-outline-success'
+    %div
+    = form.label :status
+    %br
+    = form.select :status, ['public', 'private', 'archived'], selected: 'public'
+

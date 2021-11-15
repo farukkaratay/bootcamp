@@ -1,0 +1,11 @@
+%div.article-container.mt-5
+  %h2.header
+    =link_to article.title, article
+  - if article.image.present?
+    %br
+    =image_tag(article.image, class: "article-summary-image")
+  %div.body
+    =article.body.truncate(50, separator: "...")
+    - if article.body.size > 50
+      =link_to "Daha Fazla", article
+  %hr

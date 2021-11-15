@@ -1,0 +1,21 @@
+- if current_user.present?
+  %div.buttons.float-end
+
+    =link_to "Düzenle ", edit_article_path, class: 'btn btn-info'
+    =link_to "Sil ", article_path(@article), method: "delete",class: 'btn btn-danger', data: { confirm: "Emin misiniz?" }
+%h2= @article.title
+
+- if @article.image.present?
+  =image_tag(@article.image, class: 'article-image')
+%p= @article.body
+%br
+%p= @article.likes.count.to_s + " Beğeniler"
+- if current_user.present?
+  - if @article.likes.where(user_id: current_user.id).present?
+    =link_to "Beğeniyi Geri Al", like_path(id: @article.id)
+  - else
+    =link_to "Beğen", like_path(id: @article.id)
+%br
+=link_to "Geri", root_path
+=render "comments/comments"
+=render "comments/form"
